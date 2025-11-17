@@ -22,36 +22,26 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-package com.github.scalerock.snv
-
-import javafx.application.Application
-import javafx.fxml.FXMLLoader
-import javafx.scene.{Parent, Scene}
-import javafx.stage.Stage
-
-class Runner extends Application:
-  override def start(stage: Stage): Unit =
-    val fxmlUrl = getClass.getResource("gui/MainTopology.fxml")
-    if fxmlUrl == null then
-      System.err.println("FXML not found!")
-      return
-
-    val root: Parent = FXMLLoader.load(fxmlUrl)
-
-    val cssUrl = getClass.getResource("gui/styles/style.css")
-    if cssUrl == null then
-      System.err.println("CSS not found!")
-    else
-      val css = cssUrl.toExternalForm
-      val scene = new Scene(root)
-      scene.getStylesheets.add(css)
-      stage.setScene(scene)
-
-    stage.setTitle("Simple Network View")
-    stage.setResizable(true)
-    stage.show()
+package com.github.scalerock.snv.networking
 
 
-object Main:
-  def main(args: Array[String]): Unit =
-    Application.launch(classOf[Runner], args*)
+enum Devices {
+  case switch_l2      // Basic Layer 2 switch
+  case core_switch    // High-performance core switch
+  case router         // General-purpose router
+  case router_ap      // Router combined with wireless access point
+  case windows_server // Windows server
+  case linux_server   // Linux server
+  case domain_controller // Active Directory domain controller
+  case mail_server    // Mail server
+  case file_server    // File storage server
+  case vpn_server     // VPN server appliance
+  case windows_desktop // Windows PC
+  case linux_desktop   // Linux PC
+  case macos_desktop   // Mac desktop
+  case laptop          // Laptop
+}
+
+def getIconResourcePath(dev: Devices): String =
+  if dev == null then null
+  else s"/com/github/scalerock/snv/icons/Devices/${dev.toString}.png"

@@ -20,38 +20,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-*/
+* */
 
-package com.github.scalerock.snv
+package com.github.scalerock.snv.gui
 
-import javafx.application.Application
-import javafx.fxml.FXMLLoader
-import javafx.scene.{Parent, Scene}
-import javafx.stage.Stage
-
-class Runner extends Application:
-  override def start(stage: Stage): Unit =
-    val fxmlUrl = getClass.getResource("gui/MainTopology.fxml")
-    if fxmlUrl == null then
-      System.err.println("FXML not found!")
-      return
-
-    val root: Parent = FXMLLoader.load(fxmlUrl)
-
-    val cssUrl = getClass.getResource("gui/styles/style.css")
-    if cssUrl == null then
-      System.err.println("CSS not found!")
-    else
-      val css = cssUrl.toExternalForm
-      val scene = new Scene(root)
-      scene.getStylesheets.add(css)
-      stage.setScene(scene)
-
-    stage.setTitle("Simple Network View")
-    stage.setResizable(true)
-    stage.show()
-
-
-object Main:
-  def main(args: Array[String]): Unit =
-    Application.launch(classOf[Runner], args*)
+class MainTopologyController
