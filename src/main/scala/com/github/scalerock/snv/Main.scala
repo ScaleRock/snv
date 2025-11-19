@@ -41,11 +41,11 @@ class Runner extends Application:
     val cssUrl = getClass.getResource("gui/styles/style.css")
     if cssUrl == null then
       System.err.println("CSS not found!")
-    else
-      val css = cssUrl.toExternalForm
-      val scene = new Scene(root)
-      scene.getStylesheets.add(css)
-      stage.setScene(scene)
+      return
+    val css = cssUrl.toExternalForm
+    val scene = new Scene(root)
+    scene.getStylesheets.add(css)
+    stage.setScene(scene)
 
     stage.setTitle("Simple Network View")
     stage.setResizable(true)

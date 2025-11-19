@@ -3,9 +3,21 @@
 
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.control.Button?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.github.scalerock.snv.gui.MainTopologyController"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="800.0" prefWidth="1200.0">
+    <top>
+        <HBox fx:id="TopHbox" styleClass="top-bar">
+            <Button text="files" fx:id="TopFilesButton" styleClass="button-top"/>
+            <Button text="edit" fx:id="TopEditButton" styleClass="button-top" />
+        </HBox>
+    </top>
+    <center>
+        <Pane styleClass="main-pane" fx:id="CenterMainMenu">
+
+        </Pane>
+    </center>
 
 </BorderPane>

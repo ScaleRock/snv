@@ -1,0 +1,90 @@
+.top-bar {
+    -fx-background-color: linear-gradient(to right, #0d1b2a, #1b263b);
+    -fx-padding: 15;
+    -fx-spacing: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 2);
+    -fx-border-color: #415a77;
+    -fx-text-fill: white;
+}
+
+.button-top {
+    -fx-background-color: linear-gradient(to right, #1b263b, #415a77);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 2);
+    -fx-border-color: #415a77;
+    -fx-font-family: "Roobert", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 16px;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-text-fill: white;
+}
+
+/* Główny obszar do rysowania topologii */
+.main-pane {
+    -fx-background-color:
+        linear-gradient(to bottom, rgba(13,27,42,1) 0%, rgba(27,38,59,1) 50%, rgba(19,30,48,1) 100%),
+        linear-gradient(to right, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+    -fx-padding: 12;
+    -fx-border-color: rgba(65,90,119,0.35);
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 4);
+    -fx-min-width: 400;   /* możesz dostosować */
+    -fx-min-height: 300;
+    -fx-text-fill: white; /* domyślny kolor tekstu na białym tle */
+}
+
+.main-pane .grid-line {
+    -fx-stroke: rgba(255,255,255,0.04);
+    -fx-stroke-width: 1;
+    -fx-stroke-line-cap: butt;
+}
+
+.main-pane .net-node {
+    -fx-fill: linear-gradient(to bottom, #6fb3ff, #3b8ee6); 
+    -fx-stroke: rgba(255,255,255,0.12);
+    -fx-stroke-width: 1.5;
+    -fx-effect: dropshadow(gaussian, rgba(9,30,60,0.45), 6, 0, 0, 2);
+}
+
+.main-pane .net-node-label {
+    -fx-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-weight: 600;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 2, 0, 0, 1);
+}
+
+.main-pane .net-link {
+    -fx-stroke: rgba(140,170,210,0.85); /* stonowany niebieski */
+    -fx-stroke-width: 2;
+    -fx-stroke-line-cap: round;
+}
+
+
+.main-pane .net-link:hover,
+.main-pane .net-link.accent {
+    -fx-stroke: linear-gradient(to right, #97c7ff, #5aa0ff);
+    -fx-stroke-width: 3.5;
+    -fx-effect: dropshadow(gaussian, rgba(90,160,255,0.25), 8, 0, 0, 2);
+}
+
+.main-pane .selection {
+    -fx-fill: linear-gradient(to bottom, #ffda7a, #ffb84d); /* ciepły akcent kontrastujący z tłem */
+    -fx-stroke: rgba(255,255,255,0.9);
+    -fx-stroke-width: 2;
+    -fx-effect: dropshadow(gaussian, rgba(255,184,77,0.18), 10, 0, 0, 4);
+}
+
+.main-pane .status-up {
+    -fx-fill: #6ee7a6; /* zielony przyjemny */
+}
+.main-pane .status-down {
+    -fx-fill: #ff7b7b; /* stonowany czerwony */
+}
+
+.main-pane .hint {
+    -fx-fill: rgba(255,255,255,0.80);
+    -fx-font-size: 11px;
+    -fx-font-style: italic;
+}
