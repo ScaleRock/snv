@@ -25,8 +25,8 @@ SOFTWARE.
 package com.github.scalerock.snv.gui
 
 import javafx.fxml.FXML
-import javafx.scene.control.Button
-import javafx.scene.input.ScrollEvent
+import javafx.scene.control.{Button, ContextMenu, MenuItem}
+import javafx.scene.input.{MouseButton, MouseEvent, ScrollEvent}
 import javafx.scene.layout.{HBox, Pane}
 import javafx.scene.shape.Line
 
@@ -38,7 +38,15 @@ class MainTopologyController:
   @FXML private var TopEditButton: Button = _
   @FXML private var CenterMainMenu: Pane = _
 
+  private val constextMenu: ContextMenu = new ContextMenu()
+  private val Delete: MenuItem = new MenuItem("Delete")
+  private val Add: MenuItem = new MenuItem("Add")
+  private val Notes: MenuItem = new MenuItem("Notes")
+
+
+
   private var Scale: Double = 1.0
+  private var IsMiniMenuOpen: Boolean = false
 
   private def drawLines(): Unit =
     if CenterMainMenu == null then return
@@ -84,13 +92,44 @@ class MainTopologyController:
       Scale = (Scale - deltaY / 80).max(0.5).min(10.0)
       drawLines()
     })
+  private def setUpClickEvent(): Unit =
+    if CenterMainMenu == null then return
 
+    CenterMainMenu.setOnMouseClicked((event: MouseEvent) => {
+      if event.getButton == MouseButton.PRIMARY && event.getClickCount == 2 then
+        Scale = 1.0
+        drawLines()
+      else if event.getButton == MouseButton.PRIMARY && IsMiniMenuOpen then
+        IsMiniMenuOpen = false
+        constextMenu.hide()
 
+      else if event.getButton == MouseButton.SECONDARY && event.getClickCount == 1 then
+        if !IsMiniMenuOpen then
+          IsMiniMenuOpen = true
+          constextMenu.show(CenterMainMenu, event.getScreenX, event.getScreenY)
+        else
+          IsMiniMenuOpen = false
+          constextMenu.hide()
+
+    })
+
+  def deleteOnAction(): Unit = ???
+  def addOnAction(): Unit = ???
+  def notesOnAction(): Unit = ???
+  
   @FXML
-  private def initialize(): Unit = {
+  private def initialize(): Unit =
+    constextMenu.getItems.addAll(Add, Notes, Delete)
+    constextMenu.getStyleClass.add("mini-menu")
+    
+    Delete.setOnAction(_ => deleteOnAction())
+    Add.setOnAction(_ => addOnAction())
+    Notes.setOnAction(_ => notesOnAction())
+    
     CenterMainMenu.widthProperty.addListener((_, _, _) => drawLines())
     CenterMainMenu.heightProperty.addListener((_, _, _) => drawLines())
 
     setUpMouseEvents()
-
-  }
+    setUpClickEvent()
+    
+    

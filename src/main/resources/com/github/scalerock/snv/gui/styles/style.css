@@ -18,7 +18,6 @@
     -fx-text-fill: white;
 }
 
-/* Główny obszar do rysowania topologii */
 .main-pane {
     -fx-background-color:
         linear-gradient(to bottom, rgba(13,27,42,1) 0%, rgba(27,38,59,1) 50%, rgba(19,30,48,1) 100%),
@@ -29,9 +28,9 @@
     -fx-border-radius: 8;
     -fx-background-radius: 8;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 4);
-    -fx-min-width: 400;   /* możesz dostosować */
+    -fx-min-width: 400;
     -fx-min-height: 300;
-    -fx-text-fill: white; /* domyślny kolor tekstu na białym tle */
+    -fx-text-fill: white;
 }
 
 .main-pane .grid-line {
@@ -41,7 +40,7 @@
 }
 
 .main-pane .net-node {
-    -fx-fill: linear-gradient(to bottom, #6fb3ff, #3b8ee6); 
+    -fx-fill: linear-gradient(to bottom, #6fb3ff, #3b8ee6);
     -fx-stroke: rgba(255,255,255,0.12);
     -fx-stroke-width: 1.5;
     -fx-effect: dropshadow(gaussian, rgba(9,30,60,0.45), 6, 0, 0, 2);
@@ -56,7 +55,7 @@
 }
 
 .main-pane .net-link {
-    -fx-stroke: rgba(140,170,210,0.85); /* stonowany niebieski */
+    -fx-stroke: rgba(140,170,210,0.85);
     -fx-stroke-width: 2;
     -fx-stroke-line-cap: round;
 }
@@ -70,21 +69,49 @@
 }
 
 .main-pane .selection {
-    -fx-fill: linear-gradient(to bottom, #ffda7a, #ffb84d); /* ciepły akcent kontrastujący z tłem */
+    -fx-fill: linear-gradient(to bottom, #ffda7a, #ffb84d);
     -fx-stroke: rgba(255,255,255,0.9);
     -fx-stroke-width: 2;
     -fx-effect: dropshadow(gaussian, rgba(255,184,77,0.18), 10, 0, 0, 4);
 }
 
 .main-pane .status-up {
-    -fx-fill: #6ee7a6; /* zielony przyjemny */
+    -fx-fill: #6ee7a6;
 }
 .main-pane .status-down {
-    -fx-fill: #ff7b7b; /* stonowany czerwony */
+    -fx-fill: #ff7b7b;
 }
 
 .main-pane .hint {
     -fx-fill: rgba(255,255,255,0.80);
     -fx-font-size: 11px;
     -fx-font-style: italic;
+}
+
+
+.mini-menu {
+    -fx-background-color: linear-gradient(to bottom, #1b263b, #0d1b2a);
+    -fx-border-color: #415a77;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 6, 0, 0, 3);
+}
+
+.mini-menu .menu-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 13px;
+    -fx-padding: 6 12;
+}
+
+.mini-menu .menu-item:hover {
+    -fx-background-color: rgba(65,90,119,0.35);
+    -fx-text-fill: #d5d0e2;
+}
+
+.mini-menu .separator {
+    -fx-background-color: rgba(255,255,255,0.08);
+    -fx-padding: 2 0;
 }
