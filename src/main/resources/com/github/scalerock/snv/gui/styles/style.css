@@ -115,3 +115,73 @@
     -fx-background-color: rgba(255,255,255,0.08);
     -fx-padding: 2 0;
 }
+
+
+.popup-dialog {
+    -fx-background-color: linear-gradient(to bottom, #1b263b, #0d1b2a);
+    -fx-border-color: #415a77;
+    -fx-border-width: 1;
+    -fx-padding: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 4);
+}
+
+.popup-dialog .header-panel {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 10 0;
+}
+
+.popup-dialog .header-panel .label {
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+}
+
+.popup-dialog .content {
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 14px;
+}
+
+.popup-dialog .combo-box,
+.popup-dialog .list-view {
+    -fx-background-color: linear-gradient(to bottom, #1b263b, #0d1b2a);
+    -fx-border-color: rgba(65,90,119,0.5);
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-text-fill: white;
+}
+
+.popup-dialog .combo-box .cell,
+.popup-dialog .list-view .cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-padding: 6 10;
+}
+
+.popup-dialog .combo-box .cell:hover,
+.popup-dialog .list-view .cell:hover {
+    -fx-background-color: rgba(65,90,119,0.35);
+    -fx-text-fill: #d5d0e2;
+}
+
+.popup-dialog .button-bar .button {
+    -fx-background-color: linear-gradient(to right, #1b263b, #415a77);
+    -fx-border-color: #415a77;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-font-family: "Roobert", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-padding: 6 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 2);
+}
+
+.popup-dialog .button-bar .button:hover {
+    -fx-background-color: linear-gradient(to right, #24344d, #4e6487);
+    -fx-text-fill: #eaeaff;
+}
+
+.popup-dialog .button-bar .button:pressed {
+    -fx-background-color: #16202f;
+}

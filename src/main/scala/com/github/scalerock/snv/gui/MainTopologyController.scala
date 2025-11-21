@@ -24,19 +24,23 @@ SOFTWARE.
 
 package com.github.scalerock.snv.gui
 
+import com.github.scalerock.snv.math.*
+import com.github.scalerock.snv.networking.Devices
 import javafx.fxml.FXML
-import javafx.scene.control.{Button, ContextMenu, MenuItem}
+import javafx.scene.control.{Button, ChoiceDialog, ContextMenu, MenuItem}
 import javafx.scene.input.{MouseButton, MouseEvent, ScrollEvent}
 import javafx.scene.layout.{HBox, Pane}
 import javafx.scene.shape.Line
+import scala.collection.JavaConverters.seqAsJavaListConverter
 
+import scala.compiletime.uninitialized
 import scala.language.postfixOps
 
 class MainTopologyController:
-  @FXML private var TopHbox: HBox = _
-  @FXML private var TopFilesButton: Button = _
-  @FXML private var TopEditButton: Button = _
-  @FXML private var CenterMainMenu: Pane = _
+  @FXML private var TopHbox: HBox = uninitialized
+  @FXML private var TopFilesButton: Button = uninitialized
+  @FXML private var TopEditButton: Button = uninitialized
+  @FXML private var CenterMainMenu: Pane = uninitialized
 
   private val constextMenu: ContextMenu = new ContextMenu()
   private val Delete: MenuItem = new MenuItem("Delete")
@@ -47,6 +51,7 @@ class MainTopologyController:
 
   private var Scale: Double = 1.0
   private var IsMiniMenuOpen: Boolean = false
+  private var MouseOnMenu: (Int, Int) = uninitialized
 
   private def drawLines(): Unit =
     if CenterMainMenu == null then return
@@ -58,11 +63,9 @@ class MainTopologyController:
     val x = CenterMainMenu.getWidth
     val y = CenterMainMenu.getHeight
 
-    val rows: Int = Math.round(this.Scale * 8).toInt
-    val columns: Int = Math.round(this.Scale * 15).toInt
+    val ((rows, columns), (rowStep, colStep)) = calculateGrid(this.Scale, x, y)
 
-    val rowStep = y / rows
-    val colStep = x / columns
+
 
     for i <- 0 to rows do
       val line = new Line()
@@ -113,8 +116,30 @@ class MainTopologyController:
 
     })
 
+  private def setupMouseDragListener(): Unit = CenterMainMenu.setOnMouseMoved(event => MouseOnMenu = (event.getX.toInt, event.getY.toInt))
+
   def deleteOnAction(): Unit = ???
-  def addOnAction(): Unit = ???
+  private def addOnAction(): Unit =
+    val options = Devices.values.map(_.toString).toList
+    if options.isEmpty then return
+
+    val cssUrl = getClass.getResource("styles/style.css")
+    if cssUrl == null then
+      System.err.println("CSS not found!")
+      return
+    val css = cssUrl.toExternalForm
+
+    val dialog = new ChoiceDialog[String](options.head, options.asJava)
+    dialog.getDialogPane.getStylesheets.add(css)
+    dialog.getDialogPane.getStyleClass.add("popup-dialog")
+    dialog.setTitle("Select device type")
+    dialog.setHeaderText("Select one of the options")
+    dialog.setContentText("Device:")
+
+    val result = dialog.showAndWait()
+    if result.isPresent then
+      println(result.get)
+
   def notesOnAction(): Unit = ???
   
   @FXML

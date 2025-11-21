@@ -20,8 +20,19 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-*/
+* */
 
-package com.github.scalerock.snv.networking
+package com.github.scalerock.snv.gui.Topology
 
-class Device(var name: String, val deviceType: Devices, var vector: (Int, Int))
+import com.github.scalerock.snv.networking.Device
+
+import scala.collection.mutable.ArrayBuffer
+
+object NemoPoint {
+    // The positions of any object are described as a vector from the point P(0;0)
+
+    private var cameraPosition: (Int, Int) = (0, 0);
+    private val objectList = new ArrayBuffer[Device]()
+
+   
+}

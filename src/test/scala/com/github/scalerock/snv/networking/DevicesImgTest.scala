@@ -13,10 +13,8 @@ class DevicesImgTest extends munit.FunSuite {
         imagePath,
         s"/com/github/scalerock/snv/icons/Devices/${device.toString}.png"
       )
-
-      // UŻYWAMY Class.getResource, bo imagePath zaczyna się od "/"
+      
       val resource = getClass.getResource(imagePath)
-
       assert(resource != null, s"Resource not found: $imagePath")
   }
 }
