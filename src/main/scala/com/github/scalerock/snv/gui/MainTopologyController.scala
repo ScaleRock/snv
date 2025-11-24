@@ -24,15 +24,17 @@ SOFTWARE.
 
 package com.github.scalerock.snv.gui
 
+import com.github.scalerock.snv.gui.Topology.NemoPoint
 import com.github.scalerock.snv.math.*
 import com.github.scalerock.snv.networking.Devices
 import javafx.fxml.FXML
 import javafx.scene.control.{Button, ChoiceDialog, ContextMenu, MenuItem}
+import javafx.scene.image.ImageView
 import javafx.scene.input.{MouseButton, MouseEvent, ScrollEvent}
 import javafx.scene.layout.{HBox, Pane}
 import javafx.scene.shape.Line
-import scala.collection.JavaConverters.seqAsJavaListConverter
 
+import scala.collection.JavaConverters.seqAsJavaListConverter
 import scala.compiletime.uninitialized
 import scala.language.postfixOps
 
@@ -51,13 +53,19 @@ class MainTopologyController:
 
   private var Scale: Double = 1.0
   private var IsMiniMenuOpen: Boolean = false
-  private var MouseOnMenu: (Int, Int) = uninitialized
+  private var MouseOnMenu: (Int, Int) = (0, 0)
 
   private def drawLines(): Unit =
     if CenterMainMenu == null then return
-    CenterMainMenu.getChildren.removeAll(
-      CenterMainMenu.getChildren.filtered(_.isInstanceOf[Line])
-    )
+    CenterMainMenu.getChildren.removeAll(CenterMainMenu.getChildren.filtered(_.isInstanceOf[Line]))
+    CenterMainMenu.getChildren
+      .filtered(_.isInstanceOf[ImageView])
+      .forEach(f => {
+        val img = f.asInstanceOf[ImageView]
+        val appliedScale = 1.0 / Scale
+        img.setFitWidth(50 * appliedScale)
+        img.setFitHeight(50 * appliedScale)
+      })
 
 
     val x = CenterMainMenu.getWidth
@@ -138,7 +146,8 @@ class MainTopologyController:
 
     val result = dialog.showAndWait()
     if result.isPresent then
-      println(result.get)
+      NemoPoint.addDevice(result.get(), MouseOnMenu._1, MouseOnMenu._2, Scale, CenterMainMenu)
+    IsMiniMenuOpen = false
 
   def notesOnAction(): Unit = ???
   
@@ -156,5 +165,6 @@ class MainTopologyController:
 
     setUpMouseEvents()
     setUpClickEvent()
+    setupMouseDragListener()
     
     

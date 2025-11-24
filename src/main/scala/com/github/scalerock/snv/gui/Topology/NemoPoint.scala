@@ -24,7 +24,10 @@ SOFTWARE.
 
 package com.github.scalerock.snv.gui.Topology
 
-import com.github.scalerock.snv.networking.Device
+import com.github.scalerock.snv.math.*
+import com.github.scalerock.snv.networking.{Device, Devices, getIconResourcePath}
+import javafx.scene.image.{Image, ImageView}
+import javafx.scene.layout.Pane
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -34,5 +37,47 @@ object NemoPoint {
     private var cameraPosition: (Int, Int) = (0, 0);
     private val objectList = new ArrayBuffer[Device]()
 
-   
+    private def getDeviceType(dev: String): Devices = Devices.values.find(_.toString == dev).orNull
+
+    def addDevice(dev: String, x: Int, y: Int, scale: Double, menu: Pane): Unit =
+        val dev_t: Devices = getDeviceType(dev)
+        if dev_t == null then return
+
+        val path = getIconResourcePath(dev_t)
+
+        val imageTry = try
+            val img = new Image(path)
+            img
+        catch
+            case e: Throwable =>
+                e.printStackTrace()
+                null
+
+        val icon = new ImageView(imageTry)
+        icon.setPreserveRatio(true)
+        icon.setCache(false)
+        val vec = calculateVec(x, y, scale, (menu.getWidth.toInt, menu.getHeight.toInt), cameraPosition)
+        if vec.isEmpty then
+            println("vec error")
+            return
+
+        val device = new Device(dev_t, vec.get)
+        objectList += device
+
+        val ((_, _), (stepX, stepY)) = calculateGrid(scale, menu.getWidth.toInt, menu.getHeight.toInt)
+
+        val gridX =
+            if stepX > 0 then (x / stepX) * stepX else x
+        val gridY =
+            if stepY > 0 then (y /stepY) * stepY else y
+
+        icon.setLayoutX(gridX - 25)
+        icon.setLayoutY(gridY - 25)
+        val appliedScale = 1.0 / scale
+
+        icon.setFitWidth(50 * appliedScale)
+        icon.setFitHeight(50 * appliedScale)
+
+        menu.getChildren.add(icon)
+
 }

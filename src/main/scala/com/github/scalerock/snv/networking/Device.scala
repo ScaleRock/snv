@@ -24,4 +24,4 @@ SOFTWARE.
 
 package com.github.scalerock.snv.networking
 
-class Device(var name: String, val deviceType: Devices, var vector: (Int, Int))
+class Device(val deviceType: Devices, var vector: (Int, Int))
